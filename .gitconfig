@@ -1,0 +1,7 @@
+[init]
+	defaultBranch = main
+[user]
+	email = 
+	name = Angry Pixel
+[pull]
+	rebase = true

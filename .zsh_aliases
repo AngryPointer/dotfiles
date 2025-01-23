@@ -1,0 +1,10 @@
+alias c="clear"
+alias vim='nvim'
+alias vi='vim'
+alias ls='ls --color=auto'
+alias k='kubectl'
+alias h='helm'
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+
