@@ -34,8 +34,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 #Zinit plugins install
 zinit ice depth=1; zinit light romkatv/powerlevel10k
-zinit light zsh-users/zsh-syntax-highlighting 
-zinit light zsh-users/zsh-completions 
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
@@ -45,6 +45,7 @@ zstyle ':completion:*' macher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 #zstyle ':omz:plugins:alias-finder' autoload yes # disabled by default
 #zstyle ':omz:plugins:alias-finder' longer yes # disabled by default
 #zstyle ':omz:plugins:alias-finder' exact yes # disabled by default
@@ -52,9 +53,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 #Aliases
 alias ls='ls --color'
-
-# Shell Integartions
-eval "$(fzf --zsh)"
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -72,7 +70,13 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# source zsh_aliases 
+# Shell Integartions
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
+
+zle_highlight+=(paste:none)
+
+# source zsh_aliases
 [[ ! -f ${HOME}/.zsh_aliases ]] || source ${HOME}/.zsh_aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
