@@ -1,3 +1,4 @@
+source ~/.keyfile
 alias c="clear"
 alias vim='nvim'
 alias vi='vim'
@@ -19,5 +20,5 @@ git-new-repo() {
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/user/repos \
   -d '{"name":"'${REPONAME,,}'","description":"This is your '${REPONAME,,}' repo!","homepage":"https://github.com","private":false}' && \
-  git clone git@github.com:angrypointer/${REPONAME,,}.git
+  git clone git@github.com:AngryPointer/${REPONAME,,}.git
 }
