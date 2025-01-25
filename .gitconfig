@@ -5,3 +5,5 @@
 	name = AngryPixel
 [pull]
 	rebase = true
+[core]
+	sshCommand = ssh -i ~/.ssh/gitnpavgm
