@@ -1,24 +1,49 @@
+#!/bin/env zsh
+
 source ~/.keyfile
 alias c="clear"
 alias vim='nvim'
 alias vi='vim'
 alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 alias k='kubectl'
 alias h='helm'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias cd='z'
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 git-new-repo() {
-  randomRepoName=$RANDOM
-  read -e -p "Please provide repo name: " -i $randomRepoName REPONAME
+  _defaultRepoName=$RANDOM
+  repo=;
+  vared -p "Enter the repo name (Default: ${_defaultRepoName} ):  " repo
+  : ${repo:=$_defaultRepoName}
+  repo=${repo// /_}
+  echo "Repo name : ${repo:l}"
   curl -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GIT_API_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/user/repos \
-  -d '{"name":"'${REPONAME,,}'","description":"This is your '${REPONAME,,}' repo!","homepage":"https://github.com","private":false}' && \
-  git clone git@github.com:AngryPointer/${REPONAME,,}.git
+  -d '{"name":"'${repo:l}'","description":"This is your '${repo:l}' repo!","homepage":"https://github.com","private":false}' && \
+  git clone npavgm:AngryPointer/${repo:l}.git
+}
+
+jscan(){
+  #  java -jar /home/null/sw/jarscan/jarscan.jar -dir $1 -class $2
+}
+
+jcomp(){
+   # java -jar /home/null/sw/utils/jarcomp_02.jar
+}
+
+jad(){
+    #java -jar /home/null/sw/utils/jd-gui-1.6.6.jar
 }
