@@ -2,3 +2,4 @@
 .config/tmux/plugins
 .config/alacritty/themes
 .keyfile
+.local/share/backgrounds
