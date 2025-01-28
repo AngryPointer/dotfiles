@@ -1,4 +1,3 @@
-
 [bell]
 animation = "EaseOutExpo"
 duration = 0
@@ -51,21 +50,24 @@ mouse = "Middle"
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [terminal.shell]
-program = "/bin/zsh"
+#program = "/bin/zsh"
+program = "/usr/bin/tmux" # <- Set your path
+args = ["new-session", "-A", "-D", "-s", "Home"]
 
 [window]
 decorations = "full"
 dynamic_title = true
 option_as_alt = "Both"
-#startup_mode = "Maximized"
+startup_mode = "Maximized"
+padding = { x = 4, y = 4 }
 
-[window.dimensions]
-columns = 160
-lines = 80
+#[window.dimensions]
+#columns = 160
+#lines = 80
 
-[window.padding]
-x = 4 
-y = 4
+#[window.padding]
+#x = 4
+#y = 4
 
 [general]
 
@@ -73,5 +75,3 @@ live_config_reload = true
 import = [
   "~/.config/alacritty/themes/themes/tokyo_night.toml"
 ]
-
-[terminal]
