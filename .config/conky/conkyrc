@@ -5,8 +5,9 @@ conky.config = {
 	alignment = 'top_middle',
 	gap_x = -10,
 	gap_y = 125,
-	minimum_width = 550, minimum_height = 550,
-	maximum_width = 550,
+	minimum_width = 775, minimum_height = 550,
+	-- maximum_width = 550,
+	maximum_width = 775,
 	own_window = true,
 	own_window_type = 'normal',
 	own_window_transparent = true,
@@ -31,16 +32,15 @@ conky.config = {
 	uppercase = true,
 
 	default_color = '#D6D5D4',
---E87E3C
-	own_window_colour = '#000000',
+	own_window_colour = '#000000'
 };
 
 conky.text = [[
 ${font Anurati:size=75}${color D6D5D4}${time %A}#${color yellow}
 
-${color #ffffff}${voffset -80}${offset 150}${font Chilanka Regular:size=15} ${time %B %d %Y}
+${color #ffffff}${voffset -80}${offset 290}${font Chilanka Regular:size=15} ${time %B %d %Y}
 
-${color #ffffff}${voffset -20}${offset 180}${font Chilanka Regular:pixelsize=20}${time - %I:%M %p -}
+${color #ffffff}${voffset -10}${offset 328}${font Chilanka Regular:pixelsize=20}${time - %I:%M %p -}
 
 
 
