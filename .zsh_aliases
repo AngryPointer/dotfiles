@@ -1,24 +1,46 @@
 #!/bin/env zsh
 
 source ~/.keyfile
+
 alias c="clear"
+
 alias vim='nvim'
 alias vi='vim'
+
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
 alias k='kubectl'
 alias h='helm'
+alias tf='terraform'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
 alias cd='z'
 
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 alias cat='bat'
 
+alias mfree='free && sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free'
+
+alias m38ud='ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto -i "${1}" -c copy ${2:-video}.mp4'
+
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# export JAVA_HOME=/home/lucky/sw/lang/java/latest
+# export M2_HOME=/home/lucky/sw/build-tools/maven/latest
+# export GRADLE_HOME=/home/lucky/sw/build-tools/gradle/latest
+# export GO_HOME=/home/lucky/sw/lang/golang/current
+# export GOPATH=/home/lucky/work/GoProjects
+# export AND_PLAT_TOOLS=/home/lucky/platform-tools
+
+# export PATH=/home/lucky/bin:$JAVA_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$GO_HOME/bin:$GOPATH/bin:$AND_PLAT_TOOLS/:$PATH
+
 
 function ugrub(){
   _DATE=`date +"%Y%m%d%H%M%S"` && sudo cp /boot/grub/grub.cfg /boot/grub/grub.cfg${_DATE} -v && sudo grub-mkconfig -o /boot/grub/grub.cfg;
@@ -28,7 +50,7 @@ function taz(){ ssh -i ~/.ssh/oci-techatzoom-ssh-key-2025-01-27.key opc@80.225.2
 
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
-git-new-repo() {
+function git-new-repo() {
   _defaultRepoName=$RANDOM
   repo=;
   vared -p "Enter the repo name (Default: ${_defaultRepoName} ):  " repo
@@ -45,6 +67,7 @@ git-new-repo() {
   git clone npavgm:AngryPointer/${repo:l}.git
 }
 
+#utils function
 function jscan(){
   java -jar /home/null/sw/jarscan/jarscan.jar -dir $1 -class $2
 }
@@ -55,4 +78,64 @@ function jcomp(){
 
 function jad(){
   java -jar /home/null/sw/utils/jd-gui-1.6.6.jar
+}
+
+#Generate Java agent project
+#TODO: install archtype---
+function janfp(){
+mvn archetype:generate \
+    -DarchetypeGroupId=ja.cool.plugins \
+    -DarchetypeArtifactId=ja-plugin-archetype \
+    -DarchetypeVersion=1.3.0 \
+    -DgroupId=org.lucksoft.japlugins \
+    -DartifactId=$1 \
+    -Dversion=1.0.0 \
+    -DinteractiveMode=false \
+    -Dpackage=org.lucksoft.japlugins.${1,,}
+}
+
+function mjap(){
+mvn archetype:generate \
+    -DarchetypeGroupId=org.lucksoft \
+    -DarchetypeArtifactId=AgentArchtype \
+    -DarchetypeVersion=1.0 \
+    -DgroupId=org.lucksoft \
+    -DartifactId=${1} \
+    -Dversion=1.0 \
+    -Dpackage="org.lucksoft."${1,,} \
+    -DinteractiveMode=false
+}
+
+#mvn util functions
+function mdep(){
+mvn install:install-file \
+    -Dfile=$1 \
+    -DgroupId=$2 \
+    -DartifactId=$3 \
+    -Dversion=$4 \
+    -Dpackaging=$5
+}
+
+# Java project archtype
+function mjp(){
+groupID="org.lucksoft";
+mvn archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.4 -DgroupId=${groupID} \
+    -DartifactId=${1} \
+    -Dversion=1.0-SNAPSHOT \
+    -Dpackage=${groupID}"."${1,,} && \
+    sed -ie 's/1.7/1.8/g' ${1}/pom.xml
+}
+
+function ansibleInit(){
+  PROJECT_NAME=$1
+  CHILD_DIRS="inventories/group_vars/all inventories/host_vars playbooks library/module_utils library/filter_plugins roles/common"
+  for x in `echo ${CHILD_DIRS}`;do mkdir -p ${PROJECT_NAME}/${x}; done
+  cat >${PROJECT_NAME}/ansible.cfg <<EOF
+[defaults]
+remote_user = root
+interpreter_python = auto_silent  
+EOF
 }
