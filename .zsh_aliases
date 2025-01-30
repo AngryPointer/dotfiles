@@ -140,4 +140,4 @@ interpreter_python = auto_silent
 EOF
 }
 
-#source /home/null/.angular_completion
+source /home/null/.angular_completion
