@@ -136,6 +136,8 @@ function ansibleInit(){
   cat >${PROJECT_NAME}/ansible.cfg <<EOF
 [defaults]
 remote_user = root
-interpreter_python = auto_silent  
+interpreter_python = auto_silent
 EOF
 }
+
+#source /home/null/.angular_completion
