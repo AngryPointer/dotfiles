@@ -141,3 +141,25 @@ EOF
 }
 
 source /home/null/.angular_completion
+
+function ngenv(){
+    ENVIRONMENT=${1:-development}
+    echo "Build is for $ENVIRONMENT environment"
+    ng build --configuration $ENVIRONMENT --delete-output-path true --output-path /home/null/work/envdb/src/main/resources/static && \
+    rm -fvr /home/null/work/envdb/target/classes/static && \
+    cp -vR /home/null/work/envdb/src/main/resources/static /home/null/work/envdb/target/classes/
+}
+# alias ngenv='ng build --configuration production --output-path /home/null/work/envdb/src/main/resources/static'
+
+function ngnp(){
+    PROJECT_NAME=${1:-angular-client}
+    BOOTSTRAP_VERSION=${2:-latest}
+    echo -e "Createing new angular project: $PROJECT_NAME with bootstarp version: ${BOOTSTRAP_VERSION}"
+
+    ng new $PROJECT_NAME -S && \
+    pushd $PROJECT_NAME && \
+    npm install --save bootstrap@$BOOTSTRAP_VERSION && \
+    sed -i 's@"src/styles.css"@"node_modules/bootstrap/dist/css/bootstrap.min.css",\n              "src/styles.css"@' angular.json
+
+    popd
+}
