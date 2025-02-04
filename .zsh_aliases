@@ -163,3 +163,7 @@ function ngnp(){
 
     popd
 }
+
+function tmx(){
+  /usr/bin/tmux new-session -A -D -s ${1:-"Home"}
+}

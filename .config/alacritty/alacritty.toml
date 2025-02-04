@@ -50,9 +50,9 @@ mouse = "Middle"
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [terminal.shell]
-#program = "/bin/zsh"
-program = "/usr/bin/tmux" # <- Set your path
-args = ["new-session", "-A", "-D", "-s", "Home"]
+program = "/bin/zsh"
+#program = "/usr/bin/tmux" # <- Set your path
+#args = ["new-session", "-A", "-D", "-s", "Home"]
 
 [window]
 decorations = "full"
