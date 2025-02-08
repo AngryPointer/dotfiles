@@ -46,8 +46,6 @@ function ugrub(){
   _DATE=`date +"%Y%m%d%H%M%S"` && sudo cp /boot/grub/grub.cfg /boot/grub/grub.cfg${_DATE} -v && sudo grub-mkconfig -o /boot/grub/grub.cfg;
 }
 
-function taz(){ ssh -i ~/.ssh/oci-techatzoom-ssh-key-2025-01-27.key opc@80.225.214.202; }
-
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 function git-new-repo() {
